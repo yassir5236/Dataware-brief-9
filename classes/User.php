@@ -2,22 +2,50 @@
 
 class Utilisateur {
     private $id;
-    private $nom;
-    private $prenom;
-    private $database;
+    private $username;
+
+    private $email;
+    private $motDePasse;
 
     
     // ... autres attributs
 
-    public function __construct($id, $nom, $prenom,Database $database) {
-        $this->id = $id;
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-        $this->database = $database;
-        // ... initialisation des autres attributs
+    public function __construct($username, $email, $motDePasse) {
+        $this->username = $username;
+        $this->email = $email;
+        // Hacher le mot de passe avant de le stocker en base de données
+        $this->motDePasse = password_hash($motDePasse, PASSWORD_DEFAULT);
     }
 
-   
+    // Getters et setters
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getUsername() {
+        return $this->username;
+    }
+
+    public function setUsername($username) {
+        $this->username = $username;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function setEmail($email) {
+        $this->email = $email;
+    }
+
+    public function getMotDePasse() {
+        return $this->motDePasse;
+    }
+
+    public function setMotDePasse($motDePasse) {
+        // Hacher le nouveau mot de passe avant de le stocker en base de données
+        $this->motDePasse = password_hash($motDePasse, PASSWORD_DEFAULT);
+    }
     
 
     
